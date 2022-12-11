@@ -13,53 +13,34 @@ import org.json.JSONTokener;
 import application.Model.Entity;
 import application.Model.Roboter;
 
-
-
- 
-
  
 /**
- * Loads a map from a .json file.
+ * Loads a map from a Json file.
  *
  */
 public abstract class MapLoader {
 
-    private JSONObject json;
-   
-    
+    private JSONObject json;  
 
     public MapLoader(String filename) throws FileNotFoundException {
     	
         json = new JSONObject(new JSONTokener(new FileReader("src/application/" + filename)));
-        //json = new JSONObject(new JSONTokener(new FileReader(filename)));
-        //System.out.println("goal is " + json);
+       
     }
 
     /**
-     * Parses the JSON to create a dungeon.
-     * @return
+     * Parses the JSON to create a map.     * 
      */
     public MapOfRobot load() {
         int width = json.getInt("width");
-        int height = json.getInt("height");
-         
-        
-        //JSONObject goal = json.getJSONObject("goal-condition");
-        //System.out.println("goal is " + goal.toString());
+        int height = json.getInt("height");      
 
         MapOfRobot mapOfRobot = new MapOfRobot(width, height);
+        JSONArray jsonEntities = json.getJSONArray("entities");  
 
-        JSONArray jsonEntities = json.getJSONArray("entities");
-        
-     // System.out.println("goal is " + jsonEntities);
-
-        for (int i = 0; i < jsonEntities.length(); i++) {
-        	
-            loadEntity(mapOfRobot, jsonEntities.getJSONObject(i));
-            //System.out.println("duixiang ni shi shen em  " +jsonEntities.getJSONObject(i).toString());
-        }  
-//        System.out.println("duixiang ni shi shen em  " +mapOfRobot.getEntities());
-       
+        for (int i = 0; i < jsonEntities.length(); i++) {        	
+            loadEntity(mapOfRobot, jsonEntities.getJSONObject(i));           
+        }         
         return mapOfRobot;
     }
 
@@ -72,53 +53,21 @@ public abstract class MapLoader {
         switch (type) {
         case "player":
         	Roboter roboter = new Roboter(mapOfRobot, x, y);
-        	mapOfRobot.setPlayer(roboter);
-        	roboter.setName("roboter_1");
+        	mapOfRobot.setPlayer(roboter);  
+        	String name = json.getString("name");
+        	roboter.setName(name);
+        	int key = json.getInt("key");        	
+        	roboter.setKey(key);  
             onLoad(roboter);
+            mapOfRobot.addRobots(roboter);
             entity = roboter;            
-            break;  
-//        case "enemy":
-//        	 
-//        	break;
-//        	       
-        
+            break;         
         default:      	
         	break;
-        }
-        
-        mapOfRobot.addEntity(entity);
-        
-        
+        }        
+        mapOfRobot.addEntity(entity);     
     }
 
     public abstract void onLoad(Entity player);
-
-//    public abstract void onLoad(Wall wall);
-//    
-//    public abstract void onLoad(Exit exit);
-//    
-//    public abstract void onLoad(Invincibility invincibility);
-//    
-//    public abstract void onLoad(Bomb bomb);
-//    
-//    public abstract void onLoad(Sword sword);
-//    
-//    public abstract void onLoad(Treasure  treasure);
-//    
-//    public abstract void onLoad(Enemy  enemy);
-//    
-//    public abstract void onLoad1(Enemy enemy);
-    
- 
-    
-//    
-//    public abstract void onLoad(BombSecend1  bombSecend1);
-//    
-//    public abstract void onLoad(BombSecend2  bombSecend2);
-//    
-//    public abstract void onLoad(BombSecend3  bombSecend3);
-   
-
-    // TODO Create additional abstract methods for the other entities
 
 }

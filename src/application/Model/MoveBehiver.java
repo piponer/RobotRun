@@ -1,6 +1,6 @@
-package application;
+package application.Model;
 
-import application.Model.Roboter;
+import application.MapOfRobot;
 
 public interface MoveBehiver {	
 	public boolean canMoveTo(MapOfRobot mapOfRobot, int x, int y);

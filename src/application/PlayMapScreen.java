@@ -15,24 +15,18 @@ public class PlayMapScreen {
 
 	public PlayMapScreen(Stage stage) throws IOException {
 	    this.stage = stage;
-	    title = "Robot Map";
-	    
+	    title = "Robot Map";	    
 	    
 	    MapControllerLoader mapOnLoader = new MapControllerLoader("map.json");      
 	    
 	    controller = mapOnLoader.loadController();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MapView.fxml"));
-	
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MapView.fxml"));	
 	   
-	    loader.setController(controller);
-	
-	    // load into a Parent node called root
+	    loader.setController(controller);	
 	    Parent root = loader.load();
 	    scene = new Scene(root);
-	    root.requestFocus();
-	    
-	    
+	    root.requestFocus();   
 	}
 
 	public void start() {

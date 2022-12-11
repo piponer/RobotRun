@@ -19,28 +19,13 @@ public class MapControllerLoader extends MapLoader{
 	  private List<ImageView> entities;
 
 	    //Images
-	    private Image playerImage;
-//	    private Image wallImage;
-//	    private Image exitImage;
-	  
-	 
-	 
-	    
-	    
-		 
+	    private Image playerImage;		 
 
 		public MapControllerLoader(String filename)
 	            throws FileNotFoundException {
 	        super(filename);
 	        entities = new ArrayList<>();
-	        playerImage = new Image("/robotstand.png");
-	      //  wallImage = new Image("/brick_brown_0.png");
-	     //   exitImage = new Image("/exit.png");
-	      
-	    
-	 
-	        
-	        
+	        playerImage = new Image("/robotstand.png");	 
 	    }
 
 	    @Override
@@ -48,33 +33,7 @@ public class MapControllerLoader extends MapLoader{
 	        ImageView view = new ImageView(playerImage);	        
 	        view.setId("player");
 	        addEntity(player, view);
-	    }
-
-//	    @Override
-//	    public void onLoad(Wall wall) {
-//	        ImageView view = new ImageView(wallImage);
-//	        view.setId("wall");
-//	        addEntity(wall, view);
-//	    }
-	//    
-//	    @Override
-//	    public void onLoad(Exit exit) {
-//	        ImageView view = new ImageView(exitImage);
-//	        view.setId("exit");
-//	        addEntity(exit, view);
-//	    }
-	//    
-//	    @Override
-//	    public void onLoad(Invincibility invincibility) {
-//	        ImageView view = new ImageView(invincibilityImage);
-//	        view.setId("invincibility");
-//	        addEntity(invincibility, view);
-//	    }
-	//    
-	   
-	   
-	 
-	    
+	    } 	    
 	    
 	    public void addEntity(Entity entity, ImageView view) {
 	        trackPosition(entity, view);
@@ -85,12 +44,7 @@ public class MapControllerLoader extends MapLoader{
 
 	    /**
 	     * Set a node in a GridPane to have its position track the position of an
-	     * entity in the dungeon.
-	     *
-	     * By connecting the model with the view in this way, the model requires no
-	     * knowledge of the view and changes to the position of entities in the
-	     * model will automatically be reflected in the view.
-	     
+	     * entity in the map. with connecting the model with the view 
 	     */
 	    private void trackPosition(Entity entity, Node node) {
 	        GridPane.setColumnIndex(node, entity.getX());
@@ -99,24 +53,21 @@ public class MapControllerLoader extends MapLoader{
 	            @Override
 	            public void changed(ObservableValue<? extends Number> observable,
 	                    Number oldValue, Number newValue) {
-	                GridPane.setColumnIndex(node, newValue.intValue());
-	                //System.out.println("player move to new square x   " + newValue.intValue()); 
+	                GridPane.setColumnIndex(node, newValue.intValue());	                
 	            }
 	        });
 	        entity.y().addListener(new ChangeListener<Number>() {
 	            @Override
 	            public void changed(ObservableValue<? extends Number> observable,
 	                    Number oldValue, Number newValue) {
-	                GridPane.setRowIndex(node, newValue.intValue());
-	                //System.out.println("player move to new square y   " + newValue.intValue());
+	                GridPane.setRowIndex(node, newValue.intValue());	                
 	            }
 	        });
 	    }                    
 
 	    /**
 	     * Create a controller that can be attached to the MapView with all the
-	     * loaded entities.
-	     * @return
+	     * loaded entities.	     * 
 	     * @throws FileNotFoundException
 	     */
 	    public MapController loadController() throws FileNotFoundException {

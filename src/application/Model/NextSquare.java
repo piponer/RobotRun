@@ -1,6 +1,6 @@
-package application;
+package application.Model;
 
-public class NextSquar {
+public class NextSquare {
 
 	private int x;
 	private int y;
@@ -21,12 +21,11 @@ public class NextSquar {
 		this.y = y;
 	}
 
-	public NextSquar(int x, int y) {
+	public NextSquare(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
-	}
-	
-	
+	}	
 	
 }
+

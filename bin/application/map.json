@@ -5,8 +5,10 @@
     {
       "x": 0,
       "y": 4,
-      "type": "player"
-    }
-    
+      "type": "player",
+      "key":1,
+      "name":"robot_1"
+    },
+  
   ] 
 }

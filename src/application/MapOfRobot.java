@@ -6,7 +6,6 @@ import java.util.List;
 import application.Model.Entity;
 import application.Model.Roboter;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class MapOfRobot {
@@ -17,6 +16,8 @@ public class MapOfRobot {
     private int width, height;
     private List<Entity> entities;
     private Roboter roboter;
+    private int playerID;
+    private List<Roboter> entitiesRobter;
     
 
     public MapOfRobot(int width, int height) {
@@ -24,6 +25,8 @@ public class MapOfRobot {
         this.height = height;         
         this.roboter = null;
         this.entities = new ArrayList<>();
+        this.entitiesRobter = new ArrayList<>();
+        this.playerID = 0;
     }
 
     public int getWidth() {
@@ -33,6 +36,10 @@ public class MapOfRobot {
     public int getHeight() {
         return height;
     }
+    
+    public int getPlayerID() {
+        return playerID;
+    }   
 
     public Roboter getRoboter() {
         return roboter;
@@ -44,6 +51,20 @@ public class MapOfRobot {
 
     public void addEntity(Entity entity) {    	
         entities.add(entity);       
+    }
+    
+    public void addRobots(Roboter roboter) {    	
+    	entitiesRobter.add(roboter);       
+    }
+    
+    public Roboter getRobotsByKey() {    
+    	
+    	for(Roboter r : this.entitiesRobter) {
+    		if(r.getKey() == 1) {
+    			return r;
+    		}
+    	} 
+    	return this.roboter;
     }
     
     public void removeEntity(Entity entity) {    	

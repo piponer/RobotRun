@@ -16,18 +16,15 @@ public class PlayRunScreen  {
 
 	public PlayRunScreen(Stage stage) throws IOException {
 	    this.stage = stage;
-	    title = "Robot Run To Place";
-	    
+	    title = "Robot Run To Place";	    
 	    
 	    MapControllerLoader maponLoader = new MapControllerLoader("map.json");      
 	    
 	    controller = maponLoader.loadController();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MapView.fxml"));
-	
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MapView.fxml"));	
 	   
-	    loader.setController(controller);	
-	    
+	    loader.setController(controller);		    
 	    Parent root = loader.load();
 	    scene = new Scene(root);
 	    root.requestFocus();
@@ -44,26 +41,14 @@ public class PlayRunScreen  {
 	    if(findplayer.isRunning() == true) {
         	findplayer.cancel();
         	//findplayer.reset();
-        }
- 
-        findplayer.start();       
-        
-        
-//        ExploreBomb exploreBomb = controller.getExploreBomb();             
-//        exploreBomb.start();        
-//        if(controller.getBombstate() == 1) {  
-//        	exploreBomb.cancel();        	
-//        }
-//		
-//        controller.runInvincibility();
-		
+        } 
+        findplayer.start();  		
 	}
 	
 	public void stop() {
 		if(stage.isShowing() == true) {			 
 			stage.close();		
-		}
-		
+		}		
 	}
 	
 	public MapController getController() {

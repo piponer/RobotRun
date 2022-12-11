@@ -1,7 +1,6 @@
-package application;
+package application.Model;
 
-import application.Model.Entity;
-import application.Model.Roboter;
+import application.MapOfRobot;
 
 public class MoveBehiverRoboter implements MoveBehiver {    
 	
@@ -21,10 +20,7 @@ public class MoveBehiverRoboter implements MoveBehiver {
 
 	@Override
 	public void pickup(MapOfRobot mapOfRobot, Roboter roboter,int x,int y) {
-		// TODO Auto-generated method stub		
-	}
-
- 
-	
+		// TODO  		
+	}	
 
 }

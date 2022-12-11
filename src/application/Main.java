@@ -17,17 +17,7 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-//			StackPane root = new StackPane();
-//			Scene scene = new Scene(root,400,400);
-//			
-//			button = new Button("hello world");
-//			root.getChildren().addAll(button);
-//			
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
-			
+		try {			
 			MenuApplication menuScreen = new MenuApplication(primaryStage);
 			PlayMapScreen mapScreen = new PlayMapScreen(primaryStage);
 			menuScreen.getController().setMapScreen(mapScreen);
@@ -35,10 +25,6 @@ public class Main extends Application {
 			menuScreen.getController().setRunScreen(runScreen);
 			PlayAdvScreen advScreen = new PlayAdvScreen(primaryStage);
 			menuScreen.getController().setAdvScreen(advScreen);
-			
-			
-			
-			
 			
 			menuScreen.start();
 			//mapScreen.start();

@@ -1,14 +1,10 @@
 package application;
 
 import java.io.IOException;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-
-
 
 public class MenuApplication  {
 	
@@ -25,8 +21,7 @@ public class MenuApplication  {
 	        controller = new MenuController();
 	        loader = new FXMLLoader(getClass().getResource("menu.fxml"));
 	        loader.setController(controller);
-
-	        // load into a Parent node called root
+	    
 	        Parent root = loader.load();
 	        scene = new Scene(root);
 	        root.requestFocus();
@@ -39,14 +34,9 @@ public class MenuApplication  {
 	    	
 	    	stage.setTitle(title);
 	        stage.setScene(scene);
-	        stage.show();
+	        stage.show();	        
 	        
-	        
-	    }
-	    
-	    
-	    
-
+	    }   
 	    public MenuController getController() {
 	        return controller;
 	    }
