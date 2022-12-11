@@ -1,5 +1,8 @@
 package application;
 
+import application.Model.Entity;
+import application.Model.Roboter;
+
 public class MoveBehiverRoboter implements MoveBehiver {    
 	
 	@Override

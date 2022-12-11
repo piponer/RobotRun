@@ -5,6 +5,8 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Model.Roboter;
+
 //import javax.swing.text.html.parser.Entity;
 
 import javafx.animation.AnimationTimer;
@@ -25,6 +27,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+
  
 
 
@@ -38,15 +42,23 @@ public class MapController  {
     @FXML
     private GridPane squares;
 
+    
+    private Label label;
+    
+    
     private List<ImageView> initialEntities;
 
     private Roboter roboter;
 
-    private MapOfRobot mapOfRobot;     
-        
+    private MapOfRobot mapOfRobot;             
     
     private MenuApplication menuScreen;
-   
+    
+    private FindPlayer findplayer; 
+    
+ 
+    
+    
     
     private AnimationTimer timer;
     private Integer i=0;
@@ -54,16 +66,16 @@ public class MapController  {
     public MapController(MapOfRobot mapOfRobot, List<ImageView> initialEntities) {
         this.mapOfRobot = mapOfRobot;
         this.roboter = mapOfRobot.getRoboter();
-        this.initialEntities = new ArrayList<>(initialEntities);
-    
-     //   this.findplayer = new FindPlayer(this.mapOfRobot);
-       
+        this.initialEntities = new ArrayList<>(initialEntities);    
+        this.findplayer = new FindPlayer(this.mapOfRobot);
+        this.label = new Label();
+        
         
     }    
 	 
 	@FXML
     public void initialize() {
-        Image ground = new Image("/dirt_0_new.png");
+        Image ground = new Image("/grass.png");
 	 
 
         // Add the ground first so it is below all other entities
@@ -78,65 +90,105 @@ public class MapController  {
 
         for (ImageView entity : initialEntities) {
             squares.getChildren().add(entity);
-        	System.out.println("entity is ");
+        	System.out.println("entity is " + entity.getId());
         }
+            
+        
+        Label label1 = new Label();
+        label1.setText("MOVE\nREPORT"); 
+        squares.add(label1,15,0);
         
         
-//        Button button = new Button("hello world");
-//        squares.getChildren().add(button);
+        this.label.setText("Output: 0,0,WEST"); 
+        label.setPrefWidth(150);   
+        squares.add(label,15,1);
         
     }
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
+    	String report = "";
         switch (event.getCode()) {
         case UP:
         	roboter.moveUp();  
-             
-            
+            report = "Output: " + roboter.getX() + "," + roboter.getY()
+            + ",NORTH";
+        	this.label.setText(report);
              
              
             break;
         case DOWN:
         	roboter.moveDown();
-             
+        	report = "Output: " + roboter.getX() + "," + roboter.getY()
+             + ",SOUTH";
+         	this.label.setText(report);
             
             break;
         case LEFT:
         	roboter.moveLeft();
-            
+        	report = "Output: " + roboter.getX() + "," + roboter.getY()
+            + ",WEST";
+        	this.label.setText(report);
             
             break;
         case RIGHT:
         	roboter.moveRight();  
-             
-            
+        	report = "Output: " + roboter.getX() + "," + roboter.getY()
+            + ",EAST";
+        	this.label.setText(report);             
             break;            
-        case F:        	      	 
-        	 
-        	break;
-        case B:
-        	
-        	 
-        	
-        	break;
-        	
+        case F:   
+        	break;   
         default:
             break;
         }
     }
 
-	public MapOfRobot getDungeon() {
+	public MapOfRobot getMap() {
 		return mapOfRobot;
 	}
 	
-	 
+	
+	public void movePlayer(int x,int y) {
+			int targetX = mapOfRobot.getHeight() > x? x: mapOfRobot.getHeight();
+			int targetY =  mapOfRobot.getWidth() > y? y: mapOfRobot.getWidth();			
+			
+	        findplayer.setDelay(Duration.seconds(0));
+	        findplayer.setPeriod(Duration.seconds(1));
+	        
+	        findplayer.valueProperty().addListener(new ChangeListener<ArrayList<Integer>>(){
+	
+				@Override
+				public void changed(ObservableValue<? extends ArrayList<Integer>> arg0, ArrayList<Integer> oldint,
+						ArrayList<Integer> newint) {					 
+					 if(newint != null) {
+						 int y = newint.get(0);
+						 int x = newint.get(1);	
+						 if(y < targetX) {
+							 roboter.moveRight(); 
+						 }
+						 System.out.println("x is " + x + " targety is " + targetY);
+						 if(x > targetY) {
+							 System.out.println("x is " + y + " targety is " + targetY);
+							 roboter.moveUp();
+						 }
+						 String report = "Output: " + roboter.getX() + "," + roboter.getY()
+				          + ",EAST";
+						 label.setText(report); 	
+						  
+							 
+					 }	 	
+				}
+	        }); 
+		}
 	
 	 
 	
-//	public FindPlayer getFindplayer() {
-//		return findplayer;
-//	}
+	 
+	
+	public FindPlayer getFindplayer() {
+		return findplayer;
+	}
 
 
 
@@ -251,11 +303,11 @@ public class MapController  {
 	
 	public void addEntityView(ImageView view,int x, int y) {
 		if(mapOfRobot.getEntity(x, y) != null) {
-			if(mapOfRobot.getEntity(x, y).getName().compareTo("wall") != 0) {			
+			//if(mapOfRobot.getEntity(x, y).getName().compareTo("wall") != 0) {			
 				GridPane.setColumnIndex(view, x);
 				GridPane.setRowIndex(view, y);
 				squares.getChildren().add(view);
-			}
+		//	}
 		} else {
 			GridPane.setColumnIndex(view, x);
 			GridPane.setRowIndex(view, y);
@@ -263,7 +315,9 @@ public class MapController  {
 		}
 	}
 	
- 
+	public MapOfRobot getMapOfRobot() {
+		return mapOfRobot;
+	}
 	
 	public void setMenuScreen(MenuApplication menuScreen) {
 		this.menuScreen = menuScreen;

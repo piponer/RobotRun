@@ -33,10 +33,8 @@ public class MenuApplication  {
 	    }
 
 	    public void start() {
-	        if(stage.isShowing() == true) {
-	        	System.out.println(" bug !!!");
-	        	stage.close();
-	        	
+	        if(stage.isShowing() == true) {	        	 
+	        	stage.close();	        	
 	        }
 	    	
 	    	stage.setTitle(title);

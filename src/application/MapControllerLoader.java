@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.Model.Entity;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -32,7 +33,7 @@ public class MapControllerLoader extends MapLoader{
 	            throws FileNotFoundException {
 	        super(filename);
 	        entities = new ArrayList<>();
-	        playerImage = new Image("/human_new.png");
+	        playerImage = new Image("/robotstand.png");
 	      //  wallImage = new Image("/brick_brown_0.png");
 	     //   exitImage = new Image("/exit.png");
 	      
@@ -75,7 +76,7 @@ public class MapControllerLoader extends MapLoader{
 	 
 	    
 	    
-	    private void addEntity(Entity entity, ImageView view) {
+	    public void addEntity(Entity entity, ImageView view) {
 	        trackPosition(entity, view);
 	        entities.add(view);        
 	    }
@@ -113,7 +114,7 @@ public class MapControllerLoader extends MapLoader{
 	    }                    
 
 	    /**
-	     * Create a controller that can be attached to the DungeonView with all the
+	     * Create a controller that can be attached to the MapView with all the
 	     * loaded entities.
 	     * @return
 	     * @throws FileNotFoundException

@@ -30,10 +30,18 @@ public class Main extends Application {
 			
 			MenuApplication menuScreen = new MenuApplication(primaryStage);
 			PlayMapScreen mapScreen = new PlayMapScreen(primaryStage);
-			menuScreen.getController().setMazeScreen(mapScreen);
+			menuScreen.getController().setMapScreen(mapScreen);
+			PlayRunScreen runScreen = new PlayRunScreen(primaryStage);
+			menuScreen.getController().setRunScreen(runScreen);
+			PlayAdvScreen advScreen = new PlayAdvScreen(primaryStage);
+			menuScreen.getController().setAdvScreen(advScreen);
 			
-			//menuScreen.start();
-			mapScreen.start();
+			
+			
+			
+			
+			menuScreen.start();
+			//mapScreen.start();
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -10,6 +10,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import application.Model.Entity;
+import application.Model.Roboter;
+
 
 
  
@@ -70,7 +73,7 @@ public abstract class MapLoader {
         case "player":
         	Roboter roboter = new Roboter(mapOfRobot, x, y);
         	mapOfRobot.setPlayer(roboter);
-        	roboter.setName("roboter 1");
+        	roboter.setName("roboter_1");
             onLoad(roboter);
             entity = roboter;            
             break;  

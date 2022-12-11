@@ -1,8 +1,12 @@
-package application;
+package application.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import application.MapOfRobot;
+import application.MoveBehiver;
+import application.MoveBehiverRoboter;
+import application.NextSquar;
 import javafx.util.Pair;
  
 
@@ -10,8 +14,7 @@ public class Roboter extends Entity  {
 
 	private MapOfRobot mapOfRobot;
  
-  
-    
+	private String name;    
    
     
     private NextSquar nextSquar = new NextSquar(0,0);
@@ -28,8 +31,7 @@ public class Roboter extends Entity  {
      */
     public Roboter(MapOfRobot mapOfRobot, int x, int y) {
         super(x, y);
-        this.mapOfRobot = mapOfRobot;
-        
+        this.mapOfRobot = mapOfRobot;        
         
     } 
 
@@ -132,6 +134,14 @@ public class Roboter extends Entity  {
 
 	public void setMovePlayer(MoveBehiver movePlayer) {
 		this.movePlayer = movePlayer;
+	}	
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;		
 	}
  
  
